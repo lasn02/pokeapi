@@ -8,9 +8,16 @@ def get_pokemon_info(name):
     reponse = requests.get(url)
     print(reponse)
     if reponse.status_code == 200:
-        print ("Data retrieved!")
+        pokemon_data = reponse.json()
+        return pokemon_data
     else:
         print(f"Failed to retrieve data {reponse.status_code}")
 
-pokemon_name = "pikachu"
-get_pokemon_info(pokemon_name)
+pokemon_name = "typhlosion"
+pokemon_info = get_pokemon_info(pokemon_name)
+
+if pokemon_info:
+    print(f"Name: {pokemon_info["name"].capitalize()}")
+    print(f"Id: {pokemon_info["id"]}")
+    print(f"Height: {pokemon_info["height"]}")
+    print(f"Weight: {pokemon_info["weight"]}")
